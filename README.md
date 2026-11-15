@@ -35,6 +35,23 @@ That is a habit, not a dependency. The library adds two things the three lines c
 
 If you have neither problem, you are done.
 
+**Prefer the smallest thing that works**, in this order:
+
+1. The three lines above.
+2. Your own small version, written by you or by your coding agent, in your language and
+   your codebase. A prompt that does it:
+
+   > Make it impossible in this pipeline to confuse "the source returned nothing" with "we
+   > could not read the source". Never turn an exception into an empty result. Treat an
+   > empty result as a failure unless the source itself proves it is empty. Record the row
+   > count per source and run in one small table, and fail the run when a source that used
+   > to return rows returns none. Add no dependency.
+
+3. This library, if you want exactly that already written and tested, in Python.
+
+**Python only.** The idea is not: it is the same three lines in any language. There is no
+port, and none is planned.
+
 ## What already exists, and is often the better choice
 
 - **Result types.** Rust's `Result<Vec<T>, E>`, or the `returns` package in Python, make
@@ -58,7 +75,23 @@ are synthetic, and each is labelled. Not on PyPI yet. The API may still change.
 ---
 
 `silentzero` is five gates and one three-state result type that make those two sentences
-impossible to confuse. No dependencies, standard library only, under 700 lines of library code.
+impossible to confuse. No dependencies, standard library only.
+
+## How big it is, and why
+
+550 lines of Python, counted without comments and docstrings:
+
+| File | Lines | What it is for |
+|---|---|---|
+| `result.py` | 84 | the three states and `look()`: the three lines above, plus the refusals |
+| `gates.py` | 155 | the five gates; each is a short function that returns a verdict |
+| `ledger.py` | 113 | the history: one append-only SQLite file of row counts per source and run |
+| `report.py` | 60 | collects verdicts, exits non-zero |
+| `cli.py` | 123 | the demo (`silentzero cases`) and a view of the run log; not needed at runtime |
+| the rest | 15 | exports |
+
+Most of it is the history and the gates. If you need one gate, write that one: the gate
+that catches a source dropping from rows to none is about 30 lines over one table.
 
 ```
 pip install git+https://github.com/elcolumbio/silentzero@v0.1.0
