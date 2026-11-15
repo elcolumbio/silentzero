@@ -1,0 +1,61 @@
+{
+  "jobs": [
+    {
+      "id": 8503792002,
+      "title": "Account Executive - Italy",
+      "location": {
+        "name": "Remote, Italy"
+      },
+      "updated_at": "2026-08-31T17:56:36-04:00",
+      "absolute_url": "https://job-boards.greenhouse.io/gitlab/jobs/8503792002"
+    },
+    {
+      "id": 8556658002,
+      "title": "AI Engineer",
+      "location": {
+        "name": "Remote, Bangalore"
+      },
+      "updated_at": "2026-08-31T17:56:36-04:00",
+      "absolute_url": "https://job-boards.greenhouse.io/gitlab/jobs/8556658002"
+    },
+    {
+      "id": 8638232002,
+      "title": "AI Transformation Owner, CRO",
+      "location": {
+        "name": "Remote, United States"
+      },
+      "updated_at": "2026-08-31T17:56:36-04:00",
+      "absolute_url": "https://job-boards.greenhouse.io/gitlab/jobs/8638232002"
+    },
+    {
+      "id": 8716179002,
+      "title": "AI Transformation Owner, Product & Design",
+      "location": {
+        "name": "Remote, Canada; Remote, United Kingdom; Remote, United States"
+      },
+      "updated_at": "2026-08-31T17:56:36-04:00",
+      "absolute_url": "https://job-boards.greenhouse.io/gitlab/jobs/8716179002"
+    },
+    {
+      "id": 8631068002,
+      "title": "Area Vice President - Financial Services ",
+      "location": {
+        "name": "Remote, US"
+      },
+      "updated_at": "2026-08-31T17:56:36-04:00",
+      "absolute_url": "https://job-boards.greenhouse.io/gitlab/jobs/8631068002"
+    },
+    {
+      "id": 8675543002,
+      "title": "Associate Solutions Architect (French or German fluency) ",
+      "location": {
+        "name": "Remote Ireland"
+      },
+      "updated_at": "2026-08-31T17:56:36-04:00",
+      "absolute_url": "https://job-boards.greenhouse.io/gitlab/jobs/8675543002"
+    }
+  ],
+  "meta": {
+    "total": 229
+  }
+}

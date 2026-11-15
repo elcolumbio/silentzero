@@ -1,0 +1,65 @@
+{
+  "departments": [
+    {
+      "id": 4043187002,
+      "name": "Accounting",
+      "parent_id": 4011063002,
+      "child_ids": [],
+      "jobs": [
+        {
+          "id": 8643154002,
+          "title": "Manager, IT SOX PMO",
+          "location": {
+            "name": "Remote, United States"
+          },
+          "absolute_url": "https://job-boards.greenhouse.io/gitlab/jobs/8643154002"
+        }
+      ]
+    },
+    {
+      "id": 4115236002,
+      "name": "AI",
+      "parent_id": 4043190002,
+      "child_ids": [],
+      "jobs": [
+        {
+          "id": 8564957002,
+          "title": "Principal Product Manager, AI Custom Models",
+          "location": {
+            "name": "Remote, Canada; Remote, US"
+          },
+          "absolute_url": "https://job-boards.greenhouse.io/gitlab/jobs/8564957002"
+        },
+        {
+          "id": 8658878002,
+          "title": "Principal Product Manager, AI Software Factory",
+          "location": {
+            "name": "Remote, Canada; Remote, United States"
+          },
+          "absolute_url": "https://job-boards.greenhouse.io/gitlab/jobs/8658878002"
+        }
+      ]
+    },
+    {
+      "id": 4096751002,
+      "name": "APAC - Commercial",
+      "parent_id": 4096736002,
+      "child_ids": [],
+      "jobs": []
+    },
+    {
+      "id": 4070019002,
+      "name": "Brand Campaigns",
+      "parent_id": 4105578002,
+      "child_ids": [],
+      "jobs": []
+    },
+    {
+      "id": 4070018002,
+      "name": "Brand Design",
+      "parent_id": 4105578002,
+      "child_ids": [],
+      "jobs": []
+    }
+  ]
+}
