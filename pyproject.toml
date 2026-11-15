@@ -5,7 +5,7 @@ description = "Gates that tell 'nothing' apart from 'broken' — for pipelines w
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "Florian Benköhler" }]
+authors = [{ name = "Florian Benkö" }]
 keywords = ["data-quality", "pipeline", "health-check", "observability", "etl", "scraping"]
 classifiers = [
     "Development Status :: 4 - Beta",
