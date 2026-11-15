@@ -11,6 +11,52 @@ completely different facts arrive wearing it:
 Nothing throws. No success rate drops. The output is well-formed and every number in it
 is wrong in the safe-sounding direction — downward, quietly, for weeks.
 
+## You may not need this library
+
+For one source in one script, the whole idea is three lines. Copy them and stop reading:
+
+```python
+rows = fetch()                          # let it raise; never `except: return []`
+if not rows and not proves_empty(rows): # can this source prove it is really empty?
+    raise RuntimeError("could not look: empty result without proof")
+```
+
+`proves_empty` is yours to write: an explicit `total: 0` in the response, an HTTP 204, a
+"no open roles" marker. If the source cannot prove it, an empty result is a failure.
+
+That is a habit, not a dependency. The library adds two things the three lines cannot do:
+
+- **History.** A source that returned 40 rows every week and returns 0 today is broken. One
+  that has returned 0 since it was added is empty. Same bytes; only a record of past runs
+  tells them apart.
+- **Many sources at once.** With 200 sources, one dead one should neither abort the run nor
+  vanish into the total. Each keeps its own state, and a rule such as "at least 95 %
+  reachable" decides.
+
+If you have neither problem, you are done.
+
+## What already exists, and is often the better choice
+
+- **Result types.** Rust's `Result<Vec<T>, E>`, or the `returns` package in Python, make
+  "failed" and "empty" different types by construction. If your codebase already uses
+  them, the first half of this library is solved.
+- **Data observability.** If your data lands in a warehouse, tools such as Elementary, Soda
+  and Great Expectations watch row counts over time. They catch a drop of 50 %, where this
+  library only catches a drop to zero, and they come with alerting.
+- **Job monitors.** Healthchecks-style "dead man's switch" services catch the job that
+  never ran at all.
+
+`silentzero` is for what is left: scripts, scrapers and small pipelines with many sources
+and no warehouse, where a dependency-free file next to the code is all you want.
+
+## Status
+
+Version 0.1.0. One real user so far: the author's own production monitor, which uses the
+ledger, `coverage` and `yield_gate`. Of the four failures shown below, two are real and two
+are synthetic, and each is labelled. Not on PyPI yet. The API may still change.
+
+---
+
 `silentzero` is five gates and one three-state result type that make those two sentences
 impossible to confuse. No dependencies, standard library only, under 700 lines of library code.
 
@@ -121,39 +167,6 @@ returns to a scheduler. A missing page is cheaper than a wrong one in front of s
 making a decision on it.
 
 Wiring it into an existing pipeline: **[ADOPTING.md](ADOPTING.md)**.
-
----
-
-## Where this came from
-
-Four unrelated projects — a job-market index, an operator graph, a CAD bill-of-materials
-compiler, a citation checker — were specified in the same week. Nothing was shared
-between them: different domains, different data, different users. They converged on the
-same three things anyway, and the third one is this repo.
-
-**1. Derived facts may be published; the source artefact may not.** It decided the shape
-of all four — postings versus a sponsorship index, registers versus an operator graph, a
-vendor's STEP file versus a measured profile record, a corpus versus a findings file. In
-each case the interesting thing was legal to publish precisely because it was the
-derivative, and the discipline that follows is the same: never serve the artefact, serve
-what you computed from it, and carry the provenance so the reader can go back.
-
-**2. Each has a smaller thing that stands alone**, useful to someone who does not care
-about the main product. In three of the four, that on-ramp is more likely to find users
-than the product is. This library is one of them, extracted whole.
-
-**3. The same failure shows up anywhere a system cannot tell "nothing" from
-"broken".** A caught error returned as an empty list. A credential-less job that
-exits unseen. A fetch that stops partway and keeps whatever it already had. An
-assumed default that reaches a finished order — the four cases in the table above.
-All four gate against it, because in every case the broken state was
-indistinguishable from a working one — and stayed that way until somebody happened
-to look at a number by hand.
-
-The failure is not exotic and it is not a scraping problem. It is what happens whenever
-an absence is representable in the same type as a result, which is most of the time.
-`Optional[list]` has this bug. `except: return []` has this bug. Every dashboard that
-renders a zero without asking where the zero came from has this bug.
 
 ---
 
